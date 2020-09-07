@@ -19,12 +19,11 @@ import org.springframework.web.client.RestTemplate;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@ActiveProfiles("default")
 public abstract class SpringIntegrationTest {
 
 
   protected RestTemplate restTemplate = new RestTemplate();
  
-  protected final String DEFAULT_URL = "http://localhost:8080/";
+  protected final String DEFAULT_URL = "http://localhost:8443/";
  
 }

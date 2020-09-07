@@ -29,7 +29,7 @@
             </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>               
+                <artifactId>spring-boot-maven-plugin</artifactId>  
             </plugin>
                 <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -51,7 +51,7 @@
                 </configuration>
                 <executions>
                     <execution>
-                        <id>integration-testing</id>
+                        <id>post-integration-test</id>
                         <goals>
                             <goal>integration-test</goal>
                         </goals>
@@ -63,6 +63,23 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+               <plugin>
+                <groupId>net.serenity-bdd.maven.plugins</groupId>
+                <artifactId>serenity-maven-plugin</artifactId>
+                <version>${serenity.maven.version}</version>
+                <executions>
+                    <execution>
+                        <id>serenity-reports</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>aggregate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <reports>email</reports>
+                </configuration>
             </plugin>
         </plugins>
     </build>
@@ -87,7 +104,7 @@
         </dependency>
         <dependency>
             <groupId>com.broadleafcommerce</groupId>
-            <artifactId>broadleaf-boot-starter-hsql-database</artifactId>
+            <artifactId>broadleaf-boot-starter-database</artifactId>
         </dependency>
         <dependency>
             <groupId>org.broadleafcommerce</groupId>
@@ -108,32 +125,33 @@
         <scope>test</scope>
         </dependency>
 
-        <dependency>
-			<groupId>io.cucumber</groupId>
-			<artifactId>cucumber-java8</artifactId>
-			<version>4.2.0</version>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>io.cucumber</groupId>
-			<artifactId>cucumber-spring</artifactId>
-			<version>4.2.0</version>
-			<scope>test</scope>
-		</dependency>
-
-            <dependency>
+ <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
-            <version>4.2.6</version>
+            <version>4.2.0</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-junit</artifactId>
-            <version>4.2.6</version>
-            <scope>test</scope>
+            <groupId>net.serenity-bdd</groupId>
+            <artifactId>serenity-core</artifactId>
+            <version>${serenity.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>net.serenity-bdd</groupId>
+            <artifactId>serenity-cucumber4</artifactId>
+            <version>${serenity.cucumber.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>io.cucumber</groupId>
+                    <artifactId>cucumber-core</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>net.serenity-bdd</groupId>
+            <artifactId>serenity-emailer</artifactId>
+            <version>${serenity.version}</version>
         </dependency>
 
         <dependency>
@@ -142,25 +160,14 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
-        
+
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
             <version>3.12.1</version>
         </dependency>
-
-	<dependency>
-			<groupId>net.masterthought</groupId>
-			<artifactId>cucumber-reporting</artifactId>
-			<version>4.2.3</version>
-		</dependency>
-        		<!-- To invoke REST endpoints from Cucumber step definitions -->
-		<dependency>
-			<groupId>io.rest-assured</groupId>
-			<artifactId>rest-assured</artifactId>
-			<scope>test</scope>
-		</dependency>
-
+        
+        
         <!-- Selenium -->
         <dependency>
 <groupId>org.seleniumhq.selenium</groupId>
@@ -173,6 +180,10 @@
 <version>3.7.0</version>
 </dependency>
 
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+        </dependency>
 
     </dependencies>
 
