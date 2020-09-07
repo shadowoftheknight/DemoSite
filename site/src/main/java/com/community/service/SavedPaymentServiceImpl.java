@@ -2,6 +2,7 @@ package com.community.service;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.solr.client.solrj.response.FacetField;
 import org.broadleafcommerce.common.payment.PaymentAdditionalFieldType;
 import org.broadleafcommerce.common.payment.dto.PaymentRequestDTO;
 import org.broadleafcommerce.common.payment.dto.PaymentResponseDTO;
@@ -10,6 +11,7 @@ import org.broadleafcommerce.common.payment.service.PaymentGatewayCustomerServic
 import org.broadleafcommerce.common.vendor.service.exception.PaymentException;
 import org.broadleafcommerce.core.web.checkout.model.PaymentInfoForm;
 import org.broadleafcommerce.core.web.payment.service.SavedPaymentService;
+import org.broadleafcommerce.core.web.service.SearchFacetDTOService;
 import org.broadleafcommerce.payment.service.gateway.SamplePaymentGatewayConfiguration;
 import org.broadleafcommerce.profile.core.domain.Address;
 import org.broadleafcommerce.profile.core.domain.Customer;
@@ -40,7 +42,7 @@ public class SavedPaymentServiceImpl implements SavedPaymentService {
         try {
             PaymentRequestDTO requestDTO = buildPaymentRequestDTO(customer, paymentInfoForm.getPaymentToken());
             PaymentResponseDTO responseDTO = paymentGatewayCustomerService.createGatewayCustomer(requestDTO);
-
+            
             if (responseDTO.isSuccessful()) {
                 addAddressToResponseDTO(responseDTO, paymentInfoForm.getAddress());
                 addPaymentNameToResponseDTO(responseDTO, paymentInfoForm.getPaymentName());

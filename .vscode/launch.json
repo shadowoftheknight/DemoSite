@@ -1,0 +1,44 @@
+{
+    "configurations": [
+    
+        {
+            "type": "java",
+            "name": "Spring Boot-SiteApplication<boot-community-demo-site>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.community.SiteApplication",
+            "projectName": "boot-community-demo-site",
+            "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)",
+            "request": "launch",
+            "mainClass": "",
+            "args": ""
+          },
+          {
+            "type": "java",
+            "name": "Debug (Attach)",
+            "request": "attach",
+            "hostName": "localhost",
+            "port": 8000
+          }        
+    ],
+
+    "logViewer.watch": [
+      {
+          "title": "Demo App",
+          "pattern": "C:/Users/HoHill/Documents/NetBeansProjects/HH/broadlf/DemoSite/site/*.log"
+      },
+      {
+          "title": "/var/logs",
+          "pattern": "/var/log/**/*log"
+      },
+      {
+          "title": "npm logs",
+          "pattern": "/home/berni/.npm/_logs/*.log"
+      }
+  ]
+}
